@@ -8,3 +8,9 @@ if (!filename) {
   throw Error('A file to watch must be specified!');
 }
 
+fs.watch(filename, () => {
+  const ls = spawn('ls', ['-l', '-h', filename]);
+  ls.stdout.pipe(process.stdout);
+});
+
+console.log(`Now watching ${filename} for changes...`);
